@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>GIF 채팅방</title>
+</head>
+<body>
+<div>F12를 눌러 console 탭과 network 탭을 확인하세요.</div>
+<script src="/socket.io/socket.io.js">//소켓io가 자동으로 파일을 넣어줌</script>
+<script>
+    const socket = io.connect('http://localhost:8005', { // io는 위의 socket.io에서 넣어준것
+        path: '/socket.io', // socket.io의 path와 일치시키면 됨
+        transports: ['websocket'], // http -> ws로 치환
+    });
+    socket.on('news', function (data) { // 이벤트 리스너
+        console.log(data);
+        socket.emit('reply', 'Hello Node.JS'); // 이벤트 이름과, data를 보냄
+    });
+</script>
+</body>
+</html>
